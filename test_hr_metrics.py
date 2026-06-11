@@ -9,14 +9,14 @@ class TestEvaluateHRMetrics(unittest.TestCase):
         self.assertEqual(result["rating"], "Excellent")
         self.assertEqual(result["focus_areas"], ["Maintain current standards"])
 
-    def test_flags_low_areas(self):
+    def test_identifies_focus_areas_for_low_scores(self):
         result = evaluate_hr_metrics(65, 80, 60)
         self.assertEqual(result["rating"], "Average")
-        self.assertEqual(result["focus_areas"], ["Productivity", "Work environment"])
+        self.assertEqual(result["focus_areas"], ["Productivity", "Work Environment"])
 
     def test_threshold_boundary_for_focus_areas(self):
         result = evaluate_hr_metrics(70, 69.99, 70)
-        self.assertEqual(result["focus_areas"], ["Work climate"])
+        self.assertEqual(result["focus_areas"], ["Work Climate"])
 
     def test_rejects_invalid_scores(self):
         with self.assertRaises(ValueError):

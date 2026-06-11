@@ -31,9 +31,9 @@ def evaluate_hr_metrics(
     if productivity < 70:
         focus_areas.append("Productivity")
     if work_climate < 70:
-        focus_areas.append("Work climate")
+        focus_areas.append("Work Climate")
     if work_environment < 70:
-        focus_areas.append("Work environment")
+        focus_areas.append("Work Environment")
 
     if not focus_areas:
         focus_areas.append("Maintain current standards")
