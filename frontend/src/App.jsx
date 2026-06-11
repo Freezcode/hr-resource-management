@@ -3,10 +3,10 @@ import DashboardPage from './pages/DashboardPage'
 import LoginPage from './pages/LoginPage'
 
 export default function App() {
-  const [token, setToken] = useState(localStorage.getItem('hr_token'))
+  const [token, setToken] = useState(sessionStorage.getItem('hr_token'))
 
   const handleAuthenticated = (authToken) => {
-    localStorage.setItem('hr_token', authToken)
+    sessionStorage.setItem('hr_token', authToken)
     setToken(authToken)
   }
 

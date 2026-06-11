@@ -23,7 +23,7 @@ services:
     ports:
       - '8000:8000'
     environment:
-      DATABASE_URL: postgresql://<user>:<password>@db:5432/hr_management
+      DATABASE_URL: postgresql://hr_user:${DB_PASSWORD:-hr_password}@db:5432/hr_management
       SECRET_KEY: change_me_to_a_strong_secret_key
     depends_on:
       - db

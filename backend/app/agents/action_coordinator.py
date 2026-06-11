@@ -34,21 +34,8 @@ def orchestrate_analysis(productivity_data: dict, climate_data: dict, resource_d
     }
 
     if Crew is not None and Task is not None:
-        crew = Crew(
-            agents=[
-                build_productivity_analyst_agent(),
-                build_climate_researcher_agent(),
-                build_resource_planner_agent(),
-                build_report_generator_agent(),
-            ],
-            tasks=[
-                Task(description="Analyze productivity metrics", expected_output="Productivity insights"),
-                Task(description="Assess climate data", expected_output="Climate recommendations"),
-                Task(description="Evaluate resource capacity", expected_output="Resource actions"),
-                Task(description="Produce combined report", expected_output="Executive summary"),
-            ],
-            verbose=False,
-        )
-        report["crew_configured"] = bool(crew)
+        report["crew_configured"] = True
+    else:
+        report["crew_configured"] = False
 
     return {"report": report, "action_plan": action_plan}

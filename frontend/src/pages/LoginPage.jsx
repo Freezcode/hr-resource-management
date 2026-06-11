@@ -2,8 +2,8 @@ import { useState } from 'react'
 import api, { setToken } from '../services/api'
 
 export default function LoginPage({ onAuthenticated }) {
-  const [username, setUsername] = useState('admin')
-  const [password, setPassword] = useState('admin123')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
   const handleSubmit = async (event) => {
