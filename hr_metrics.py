@@ -13,8 +13,8 @@ def evaluate_hr_metrics(
     productivity: float, work_climate: float, work_environment: float
 ) -> dict[str, object]:
     productivity = _validate_score("productivity", productivity)
-    work_climate = _validate_score("work_climate", work_climate)
-    work_environment = _validate_score("work_environment", work_environment)
+    work_climate = _validate_score("work climate", work_climate)
+    work_environment = _validate_score("work environment", work_environment)
 
     overall_score = round((productivity + work_climate + work_environment) / 3, 2)
 
