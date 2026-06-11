@@ -1,0 +1,43 @@
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(80) UNIQUE NOT NULL,
+  hashed_password VARCHAR(255) NOT NULL,
+  role VARCHAR(30) NOT NULL DEFAULT 'employee'
+);
+
+CREATE TABLE IF NOT EXISTS employees (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(160) UNIQUE NOT NULL,
+  role VARCHAR(50) NOT NULL DEFAULT 'employee',
+  department VARCHAR(80) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tasks (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(180) NOT NULL,
+  status VARCHAR(30) NOT NULL DEFAULT 'open',
+  estimated_hours INTEGER NOT NULL DEFAULT 0,
+  actual_hours INTEGER NOT NULL DEFAULT 0,
+  is_blocked BOOLEAN NOT NULL DEFAULT FALSE,
+  assignee_id INTEGER REFERENCES employees(id),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS survey_responses (
+  id SERIAL PRIMARY KEY,
+  employee_id INTEGER NOT NULL REFERENCES employees(id),
+  engagement_score INTEGER NOT NULL CHECK (engagement_score BETWEEN 1 AND 10),
+  stress_score INTEGER NOT NULL CHECK (stress_score BETWEEN 1 AND 10),
+  sentiment VARCHAR(30) NOT NULL,
+  comment VARCHAR(500),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS metric_snapshots (
+  id SERIAL PRIMARY KEY,
+  metric_type VARCHAR(80) NOT NULL,
+  metric_value INTEGER NOT NULL,
+  source VARCHAR(80) NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
