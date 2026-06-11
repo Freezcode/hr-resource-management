@@ -16,6 +16,7 @@ class TestEvaluateHRMetrics(unittest.TestCase):
 
     def test_threshold_boundary_for_focus_areas(self):
         result = evaluate_hr_metrics(70, 69.99, 70)
+        self.assertEqual(result["rating"], "Good")
         self.assertEqual(result["focus_areas"], ["Work Climate"])
 
     def test_rejects_invalid_scores(self):

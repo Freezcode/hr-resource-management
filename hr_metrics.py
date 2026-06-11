@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 
-def _validate_score(name: str, value: float) -> float:
+def _validate_score(metric_name: str, value: float) -> float:
     if not 0 <= value <= 100:
-        raise ValueError(f"{name} must be in the range 0-100 (inclusive).")
+        raise ValueError(f"{metric_name} must be in the range 0-100 (inclusive).")
     return value
 
 
