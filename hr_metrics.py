@@ -46,15 +46,24 @@ def evaluate_hr_metrics(
 
 
 def _read_score(label: str) -> float:
-    return float(input(f"Enter {label} score (0-100): ").strip())
+    raw_value = input(f"Enter {label} score (0-100): ").strip()
+    try:
+        return float(raw_value)
+    except ValueError as exc:
+        raise ValueError(
+            "Invalid input: please enter a numeric value between 0 and 100."
+        ) from exc
 
 
 def main() -> None:
-    productivity = _read_score("productivity")
-    work_climate = _read_score("work climate")
-    work_environment = _read_score("work environment")
-
-    report = evaluate_hr_metrics(productivity, work_climate, work_environment)
+    try:
+        productivity = _read_score("productivity")
+        work_climate = _read_score("work climate")
+        work_environment = _read_score("work environment")
+        report = evaluate_hr_metrics(productivity, work_climate, work_environment)
+    except ValueError as error:
+        print(f"\nError: {error}")
+        return
 
     print("\nHR Assessment Report")
     print(f"Overall Score: {report['overall_score']}")

@@ -14,9 +14,19 @@ class TestHRMetrics(unittest.TestCase):
         self.assertEqual(result["rating"], "Average")
         self.assertEqual(result["focus_areas"], ["Productivity", "Work environment"])
 
+    def test_threshold_boundary_for_focus_areas(self):
+        result = evaluate_hr_metrics(70, 69.99, 70)
+        self.assertEqual(result["focus_areas"], ["Work climate"])
+
     def test_rejects_invalid_scores(self):
         with self.assertRaises(ValueError):
             evaluate_hr_metrics(-1, 80, 80)
+
+        with self.assertRaises(ValueError):
+            evaluate_hr_metrics(80, 101, 80)
+
+        with self.assertRaises(ValueError):
+            evaluate_hr_metrics(80, 80, 120)
 
 
 if __name__ == "__main__":
