@@ -5,7 +5,7 @@ from __future__ import annotations
 
 def _validate_score(name: str, value: float) -> float:
     if not 0 <= value <= 100:
-        raise ValueError(f"{name} must be between 0 and 100.")
+        raise ValueError(f"{name} must be in the range 0-100 (inclusive).")
     return value
 
 
@@ -48,11 +48,12 @@ def evaluate_hr_metrics(
 def _read_score(label: str) -> float:
     raw_value = input(f"Enter {label} score (0-100): ").strip()
     try:
-        return float(raw_value)
+        value = float(raw_value)
     except ValueError as exc:
         raise ValueError(
             "Invalid input: please enter a numeric value between 0 and 100."
         ) from exc
+    return _validate_score(label, value)
 
 
 def main() -> None:

@@ -3,7 +3,7 @@ import unittest
 from hr_metrics import evaluate_hr_metrics
 
 
-class TestHRMetrics(unittest.TestCase):
+class TestEvaluateHRMetrics(unittest.TestCase):
     def test_returns_excellent_when_scores_are_high(self):
         result = evaluate_hr_metrics(90, 88, 87)
         self.assertEqual(result["rating"], "Excellent")
